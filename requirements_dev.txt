@@ -14,7 +14,6 @@ Flask==1.0.2
 Flask-Testing==0.6.1
 idna==2.6
 inflection==0.3.1
--e git+https://github.com/cermatej/insis-api.git@34c50900201f1ea9789d799d6d1239dcc302791c#egg=insis_api
 itsdangerous==0.24
 Jinja2==2.10
 jsonschema==2.6.0
