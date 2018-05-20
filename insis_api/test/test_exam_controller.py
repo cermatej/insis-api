@@ -19,9 +19,7 @@ class TestExamController(BaseTestCase):
 
         Get all exams
         """
-        print(os.environ)
-
-        body = User(os.environ['INSIS_USERNAME'], os.environ['INSIS_PASS'])
+        body = User(os.environ['USERNAME'], os.environ['PASS'])
         response = self.client.open(
             '/exam',
             method='POST',
