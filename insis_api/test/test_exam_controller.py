@@ -6,6 +6,7 @@ from flask import json
 from six import BytesIO
 
 from insis_api.models.exam import Exam  # noqa: E501
+from insis_api.models.user import User  # noqa: E501
 from insis_api.test import BaseTestCase
 
 
@@ -17,9 +18,12 @@ class TestExamController(BaseTestCase):
 
         Disenroll exam with id
         """
+        body = User()
         response = self.client.open(
-            '/v2/exam/{examId}/disenroll'.format(examId=789),
-            method='POST')
+            '/exam/{examId}/disenroll'.format(examId=789),
+            method='POST',
+            data=json.dumps(body),
+            content_type='application/json')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
@@ -28,9 +32,26 @@ class TestExamController(BaseTestCase):
 
         Enroll exam with id
         """
+        body = User()
         response = self.client.open(
-            '/v2/exam/{examId}/enroll'.format(examId=789),
-            method='POST')
+            '/exam/{examId}/enroll'.format(examId=789),
+            method='POST',
+            data=json.dumps(body),
+            content_type='application/json')
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
+
+    def test_get_enrolled_exam(self):
+        """Test case for get_enrolled_exam
+
+        Get enrolled exams
+        """
+        body = User()
+        response = self.client.open(
+            '/exam/enrolled',
+            method='POST',
+            data=json.dumps(body),
+            content_type='application/json')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
@@ -39,9 +60,12 @@ class TestExamController(BaseTestCase):
 
         Get all exams
         """
+        body = User()
         response = self.client.open(
-            '/v2/exam',
-            method='GET')
+            '/exam',
+            method='POST',
+            data=json.dumps(body),
+            content_type='application/json')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
@@ -50,9 +74,12 @@ class TestExamController(BaseTestCase):
 
         Get exam by id
         """
+        body = User()
         response = self.client.open(
-            '/v2/exam/{examId}'.format(examId=789),
-            method='GET')
+            '/exam/{examId}'.format(examId=789),
+            method='POST',
+            data=json.dumps(body),
+            content_type='application/json')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
