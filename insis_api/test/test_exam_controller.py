@@ -2,6 +2,7 @@
 
 from __future__ import absolute_import
 
+import os
 from flask import json
 from six import BytesIO
 
@@ -18,13 +19,13 @@ class TestExamController(BaseTestCase):
 
         Get all exams
         """
-        body = User('wrong username', 'wrong pass')
+        body = User(os.getenv('INSIS_USERNAME'), os.getenv('INSIS_PASS'))
         response = self.client.open(
             '/exam',
             method='POST',
             data=json.dumps(body),
             content_type='application/json')
-        self.assert404(response,
+        self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
 
