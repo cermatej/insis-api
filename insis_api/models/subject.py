@@ -2,8 +2,8 @@
 
 from __future__ import absolute_import
 
-from swagger_server import util
-from swagger_server.models.base_model_ import Model
+from insis_api import util
+from insis_api.models.base_model_ import Model
 
 
 class Subject(Model):
