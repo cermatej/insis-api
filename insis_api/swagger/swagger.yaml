@@ -31,6 +31,8 @@ paths:
       responses:
         200:
           description: "Successful operation"
+          schema:
+            $ref: "#/definitions/AgendaEvent"
         404:
           description: "No events found"
       x-swagger-router-controller: "insis_api.controllers.agenda_controller"
@@ -55,6 +57,8 @@ paths:
       responses:
         200:
           description: "Successful operation"
+          schema:
+            $ref: "#/definitions/Subject"
         404:
           description: "No subjects found"
       x-swagger-router-controller: "insis_api.controllers.subject_controller"
@@ -116,7 +120,7 @@ paths:
         404:
           description: "No exams found"
       x-swagger-router-controller: "insis_api.controllers.exam_controller"
-  /exam/{examId}:
+  /exam/{exam_id}:
     post:
       tags:
       - "exam"
@@ -128,7 +132,7 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - name: "examId"
+      - name: "exam_id"
         in: "path"
         description: "ID of exam that needs to be fetched"
         required: true
@@ -148,7 +152,7 @@ paths:
         404:
           description: "Exam not found"
       x-swagger-router-controller: "insis_api.controllers.exam_controller"
-  /exam/{examId}/enroll:
+  /exam/{exam_id}/enroll:
     post:
       tags:
       - "exam"
@@ -160,7 +164,7 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - name: "examId"
+      - name: "exam_id"
         in: "path"
         description: "ID of exam to enroll"
         required: true
@@ -180,7 +184,7 @@ paths:
         404:
           description: "Exam not found"
       x-swagger-router-controller: "insis_api.controllers.exam_controller"
-  /exam/{examId}/disenroll:
+  /exam/{exam_id}/disenroll:
     post:
       tags:
       - "exam"
@@ -192,7 +196,7 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - name: "examId"
+      - name: "exam_id"
         in: "path"
         description: "ID of exam to disenroll"
         required: true
@@ -299,3 +303,63 @@ definitions:
       room: "room"
       sign_in_from: "2000-01-23T04:56:07.000+00:00"
       sign_in_to: "2000-01-23T04:56:07.000+00:00"
+  AgendaEvent:
+    type: "object"
+    properties:
+      day:
+        type: "string"
+      time_from:
+        type: "string"
+        format: "time"
+      time_to:
+        type: "string"
+        format: "time"
+      subject:
+        type: "string"
+      type:
+        type: "string"
+      room:
+        type: "string"
+      capacity:
+        type: "integer"
+        format: "int64"
+    example:
+      time_to: "time_to"
+      time_from: "time_from"
+      subject: "subject"
+      type: "type"
+      day: "day"
+      room: "room"
+      capacity: 0
+  Subject:
+    type: "object"
+    properties:
+      ident:
+        type: "string"
+      name:
+        type: "string"
+      department:
+        type: "string"
+      obligation:
+        type: "string"
+      exam_type:
+        type: "string"
+      credits:
+        type: "integer"
+        format: "int64"
+      lang:
+        type: "string"
+      subject_group:
+        type: "string"
+      agenda:
+        type: "string"
+    example:
+      exam_type: "exam_type"
+      credits: 0
+      ident: "ident"
+      obligation: "obligation"
+      name: "name"
+      subject_group: "subject_group"
+      department: "department"
+      lang: "lang"
+      agenda: "agenda"
