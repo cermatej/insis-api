@@ -11,8 +11,92 @@ tags:
 - name: "exam"
   description: "Insis student exam"
 schemes:
-- https
+- "https"
 paths:
+  /agenda:
+    post:
+      tags:
+      - "agenda"
+      summary: "Get week schedule agenda"
+      description: ""
+      operationId: "get_schedule_agenda"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Insis user credentials"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/Exam"
+        404:
+          description: "No events found"
+      x-swagger-router-controller: "insis_api.controllers.exam_controller"
+  /subject/enrolled:
+    post:
+      tags:
+      - "subject"
+      summary: "Get enrolled subjects"
+      description: ""
+      operationId: "get_enrolled_subjects"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Insis user credentials"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/Exam"
+        404:
+          description: "No subjects found"
+      x-swagger-router-controller: "insis_api.controllers.exam_controller"
+  /grades/{subjectId}:
+    post:
+      tags:
+      - "grades"
+      summary: "Get grades from subject"
+      description: ""
+      operationId: "get_grades_from_subject"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "subjectId"
+        in: "path"
+        description: "ID of subject which grades needs to be fetched"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "body"
+        description: "Insis user credentials"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/Exam"
+        404:
+          description: "No grades found"
+      x-swagger-router-controller: "insis_api.controllers.exam_controller"
   /exam:
     post:
       tags:
@@ -25,8 +109,8 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - name: "body"
-        in: "body"
+      - in: "body"
+        name: "body"
         description: "Insis user credentials"
         required: true
         schema:
@@ -57,8 +141,8 @@ paths:
         required: true
         type: "integer"
         format: "int64"
-      - name: "body"
-        in: "body"
+      - in: "body"
+        name: "body"
         description: "Insis user credentials"
         required: true
         schema:
@@ -89,8 +173,8 @@ paths:
         required: true
         type: "integer"
         format: "int64"
-      - name: "body"
-        in: "body"
+      - in: "body"
+        name: "body"
         description: "Insis user credentials"
         required: true
         schema:
@@ -121,8 +205,8 @@ paths:
         required: true
         type: "integer"
         format: "int64"
-      - name: "body"
-        in: "body"
+      - in: "body"
+        name: "body"
         description: "Insis user credentials"
         required: true
         schema:
@@ -147,8 +231,8 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - name: "body"
-        in: "body"
+      - in: "body"
+        name: "body"
         description: "Insis user credentials"
         required: true
         schema:
@@ -165,13 +249,16 @@ definitions:
   User:
     type: "object"
     required:
-    - "username"
     - "password"
+    - "username"
     properties:
       username:
         type: "string"
       password:
         type: "string"
+    example:
+      password: "password"
+      username: "username"
   Exam:
     type: "object"
     properties:
