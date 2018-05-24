@@ -1,12 +1,19 @@
 import datetime
 import re
 import typing
-from typing import Dict
+from typing import Dict, Optional
 
+import connexion
 import requests
 import six
 from bs4 import BeautifulSoup
 
+from insis_api.models.user import User
+
+
+def get_credentials() -> Optional['User']:
+    if connexion.request.is_json:
+        return User.from_dict(connexion.request.get_json())  # noqa: E501
 
 def log_in(ses: requests.Session, user: 'User'):
     data = {

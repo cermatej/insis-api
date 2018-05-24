@@ -2,14 +2,12 @@ import re
 from datetime import datetime
 from typing import Optional, List
 
-import connexion
 import requests
 from bs4 import BeautifulSoup, Tag
 from connexion import NoContent
 
 from insis_api import util
 from insis_api.models.exam import Exam  # noqa: E501
-from insis_api.models.user import User
 
 SELECTOR_ENROLLED_COURSES = '#table_1 tbody tr'
 SELECTOR_AVAILABLE_COURSES = '#table_2 tbody tr'
@@ -31,7 +29,7 @@ def disenroll_exam_by_id(exam_id, body):  # noqa: E501
 
     :rtype: None
     """
-    user = __get_credentials()
+    user = util.get_credentials()
     with requests.Session() as ses:
         util.log_in(ses, user)
         info = util.get_study_info(ses)
@@ -60,7 +58,7 @@ def enroll_exam_by_id(exam_id: int, body):  # noqa: E501
 
     :rtype: None
     """
-    user = __get_credentials()
+    user = util.get_credentials()
     with requests.Session() as ses:
         util.log_in(ses, user)
         info = util.get_study_info(ses)
@@ -124,7 +122,7 @@ def get_exam_by_id(exam_id: int, body):  # noqa: E501
 
 
 def __list_exams(selector: str) -> List['Exam']:
-    user = __get_credentials()
+    user = util.get_credentials()
     with requests.Session() as ses:
         util.log_in(ses, user)
         ter = ses.get(EXAM_LIST_LINK)
@@ -163,9 +161,3 @@ def __get_date_from_text(text: str) -> Optional[datetime]:
         return datetime.strptime(text, '%d.%m.%Y %H:%M')
     except ValueError:
         return None
-
-
-def __get_credentials() -> Optional['User']:
-    if connexion.request.is_json:
-        return User.from_dict(connexion.request.get_json())  # noqa: E501
-

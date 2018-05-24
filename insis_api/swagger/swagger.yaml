@@ -7,9 +7,6 @@ info:
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-tags:
-- name: "exam"
-  description: "Insis student exam"
 schemes:
 - "https"
 paths:
@@ -34,11 +31,9 @@ paths:
       responses:
         200:
           description: "Successful operation"
-          schema:
-            $ref: "#/definitions/Exam"
         404:
           description: "No events found"
-      x-swagger-router-controller: "insis_api.controllers.exam_controller"
+      x-swagger-router-controller: "insis_api.controllers.agenda_controller"
   /subject/enrolled:
     post:
       tags:
@@ -60,11 +55,9 @@ paths:
       responses:
         200:
           description: "Successful operation"
-          schema:
-            $ref: "#/definitions/Exam"
         404:
           description: "No subjects found"
-      x-swagger-router-controller: "insis_api.controllers.exam_controller"
+      x-swagger-router-controller: "insis_api.controllers.subject_controller"
   /grades/{subjectId}:
     post:
       tags:
@@ -96,7 +89,7 @@ paths:
             $ref: "#/definitions/Exam"
         404:
           description: "No grades found"
-      x-swagger-router-controller: "insis_api.controllers.exam_controller"
+      x-swagger-router-controller: "insis_api.controllers.grades_controller"
   /exam:
     post:
       tags:
