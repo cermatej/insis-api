@@ -2,6 +2,8 @@
 
 from __future__ import absolute_import
 
+import os
+
 from flask import json
 
 from insis_api.models.user import User  # noqa: E501
@@ -16,7 +18,7 @@ class TestAgendaController(BaseTestCase):
 
         Get week schedule agenda
         """
-        body = User()
+        body = User(os.environ['INSIS_USERNAME'], os.environ['INSIS_PASS'])
         response = self.client.open(
             '/agenda',
             method='POST',

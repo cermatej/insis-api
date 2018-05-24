@@ -2,8 +2,8 @@
 
 from __future__ import absolute_import
 
-from swagger_server import util
-from swagger_server.models.base_model_ import Model
+from insis_api import util
+from insis_api.models.base_model_ import Model
 
 
 class AgendaEvent(Model):
@@ -13,7 +13,7 @@ class AgendaEvent(Model):
     """
 
     def __init__(self, day: str = None, time_from: str = None, time_to: str = None, subject: str = None,
-                 type: str = None, room: str = None, capacity: int = None):  # noqa: E501
+                 type: str = None, room: str = None, teacher: str = None, capacity: int = None):  # noqa: E501
         """AgendaEvent - a model defined in Swagger
 
         :param day: The day of this AgendaEvent.  # noqa: E501
@@ -28,6 +28,8 @@ class AgendaEvent(Model):
         :type type: str
         :param room: The room of this AgendaEvent.  # noqa: E501
         :type room: str
+        :param teacher: The teacher of this AgendaEvent.  # noqa: E501
+        :type teacher: str
         :param capacity: The capacity of this AgendaEvent.  # noqa: E501
         :type capacity: int
         """
@@ -38,6 +40,7 @@ class AgendaEvent(Model):
             'subject': str,
             'type': str,
             'room': str,
+            'teacher': str,
             'capacity': int
         }
 
@@ -48,6 +51,7 @@ class AgendaEvent(Model):
             'subject': 'subject',
             'type': 'type',
             'room': 'room',
+            'teacher': 'teacher',
             'capacity': 'capacity'
         }
 
@@ -57,6 +61,7 @@ class AgendaEvent(Model):
         self._subject = subject
         self._type = type
         self._room = room
+        self._teacher = teacher
         self._capacity = capacity
 
     @classmethod
@@ -195,6 +200,27 @@ class AgendaEvent(Model):
         """
 
         self._room = room
+
+    @property
+    def teacher(self) -> str:
+        """Gets the teacher of this AgendaEvent.
+
+
+        :return: The teacher of this AgendaEvent.
+        :rtype: str
+        """
+        return self._teacher
+
+    @teacher.setter
+    def teacher(self, teacher: str):
+        """Sets the teacher of this AgendaEvent.
+
+
+        :param teacher: The teacher of this AgendaEvent.
+        :type teacher: str
+        """
+
+        self._teacher = teacher
 
     @property
     def capacity(self) -> int:
