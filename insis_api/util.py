@@ -12,7 +12,6 @@ from bs4 import BeautifulSoup
 
 
 def log_in(ses: requests.Session, user: 'User'):
-
     data = {
         'lang': 'cz',
         'destination': '/auth/?lang=cz',

@@ -20,13 +20,13 @@ EXAM_ENROLL_LINK = 'https://insis.vse.cz/auth/student/terminy_prihlaseni.pl'
 EXAM_LIST_LINK = 'https://insis.vse.cz/auth/student/terminy_seznam.pl'
 
 
-def disenroll_exam_by_id(examId, body):  # noqa: E501
+def disenroll_exam_by_id(exam_id, body):  # noqa: E501
     """Disenroll exam with id
 
      # noqa: E501
 
-    :param examId: ID of exam to disenroll
-    :type examId: int
+    :param exam_id: ID of exam to disenroll
+    :type exam_id: int
 
     :param body: Insis user credentials
     :type body: dict | bytes
@@ -38,7 +38,7 @@ def disenroll_exam_by_id(examId, body):  # noqa: E501
         util.log_in(ses, user)
         info = util.get_study_info(ses)
         disenroll = {
-            'termin': examId,
+            'termin': exam_id,
             'predmet': '',
             'studium': info['studium'],
             'obdobi': info['obdobi'],
@@ -49,13 +49,13 @@ def disenroll_exam_by_id(examId, body):  # noqa: E501
     return NoContent, 200
 
 
-def enroll_exam_by_id(examId: int, body):  # noqa: E501
+def enroll_exam_by_id(exam_id: int, body):  # noqa: E501
     """Enroll exam with id
 
      # noqa: E501
 
-    :param examId: ID of exam to enroll
-    :type examId: int
+    :param exam_id: ID of exam to enroll
+    :type exam_id: int
 
     :param body: Insis user credentials
     :type body: dict | bytes
@@ -67,7 +67,7 @@ def enroll_exam_by_id(examId: int, body):  # noqa: E501
         util.log_in(ses, user)
         info = util.get_study_info(ses)
         enroll = {
-            'termin': examId,
+            'termin': exam_id,
             'predmet': '',
             'studium': info['studium'],
             'obdobi': info['obdobi'],
@@ -106,13 +106,13 @@ def get_enrolled_exam(body):  # noqa: E501
     return (exams, 200) if exams else (NoContent, 404)
 
 
-def get_exam_by_id(examId: int, body):  # noqa: E501
+def get_exam_by_id(exam_id: int, body):  # noqa: E501
     """Get exam by id
 
      # noqa: E501
 
-    :param examId: ID of exam that needs to be fetched
-    :type examId: int
+    :param exam_id: ID of exam that needs to be fetched
+    :type exam_id: int
 
     :param body: Insis user credentials
     :type body: dict | bytes
@@ -120,7 +120,7 @@ def get_exam_by_id(examId: int, body):  # noqa: E501
     :rtype: Exam
     """
     for exam in __list_exams(SELECTOR_AVAILABLE_COURSES) + __list_exams(SELECTOR_ENROLLED_COURSES):
-        if exam.id == examId:
+        if exam.id == exam_id:
             return exam, 200
     return NoContent, 404
 
@@ -155,7 +155,8 @@ def __get_exam_from_html(exam_html: str) -> 'Exam':
                                              in exam_html[11 - offset].contents[0].contents if
                                              not isinstance(date_str, Tag)]
 
-    return Exam(id, accessibility, ident, subject, department, date, room, type, teacher, availability, sign_in_from, sign_in_to,
+    return Exam(id, accessibility, ident, subject, department, date, room, type, teacher, availability, sign_in_from,
+                sign_in_to,
                 sign_out_to)
 
 
@@ -169,4 +170,4 @@ def __get_date_from_text(text: str) -> Optional[datetime]:
 def __get_credentials() -> Optional['User']:
     if connexion.request.is_json:
         return User.from_dict(connexion.request.get_json())  # noqa: E501
-    return None
+
