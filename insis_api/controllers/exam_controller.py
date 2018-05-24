@@ -1,16 +1,14 @@
+import re
+from datetime import datetime
 from typing import Optional, List
 
 import connexion
-import re
 import requests
-import six
 from bs4 import BeautifulSoup, Tag
-from datetime import datetime
-
-from insis_api.models.exam import Exam  # noqa: E501
-from insis_api.models.user import User  # noqa: E501
 from connexion import NoContent
+
 from insis_api import util
+from insis_api.models.exam import Exam  # noqa: E501
 from insis_api.models.user import User
 
 SELECTOR_ENROLLED_COURSES = '#table_1 tbody tr'

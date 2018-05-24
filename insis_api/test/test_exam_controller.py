@@ -3,10 +3,9 @@
 from __future__ import absolute_import
 
 import os
-from flask import json
-from six import BytesIO
 
-from insis_api.models.exam import Exam  # noqa: E501
+from flask import json
+
 from insis_api.models.user import User  # noqa: E501
 from insis_api.test import BaseTestCase
 

@@ -1,13 +1,10 @@
 import datetime
-
 import re
-
-import connexion
-import requests
-import six
 import typing
 from typing import Dict
 
+import requests
+import six
 from bs4 import BeautifulSoup
 
 

@@ -1,12 +1,11 @@
 # coding: utf-8
 
 from __future__ import absolute_import
-from datetime import date, datetime  # noqa: F401
 
-from typing import List, Dict  # noqa: F401
+from datetime import datetime  # noqa: F401
 
-from insis_api.models.base_model_ import Model
 from insis_api import util
+from insis_api.models.base_model_ import Model
 
 
 class Exam(Model):
