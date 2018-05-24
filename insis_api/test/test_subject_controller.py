@@ -3,8 +3,9 @@
 from __future__ import absolute_import
 
 from flask import json
-from swagger_server.models.user import User  # noqa: E501
-from swagger_server.test import BaseTestCase
+
+from insis_api.models.user import User  # noqa: E501
+from insis_api.test import BaseTestCase
 
 
 class TestSubjectController(BaseTestCase):

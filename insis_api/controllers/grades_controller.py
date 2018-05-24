@@ -1,6 +1,6 @@
 import connexion
 
-from swagger_server.models.user import User  # noqa: E501
+from insis_api.models.user import User  # noqa: E501
 
 
 def get_grades_from_subject(subjectId, body):  # noqa: E501

@@ -1,6 +1,6 @@
 import connexion
 
-from swagger_server.models.user import User  # noqa: E501
+from .models.user import User  # noqa: E501
 
 
 def get_schedule_agenda(body):  # noqa: E501
