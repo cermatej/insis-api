@@ -9,7 +9,7 @@ click==6.7
 clickclick==1.2.2
 connexion==1.4.2
 coverage==4.5.1
-cryptography==2.2.2
+cryptography==3.2
 Flask==1.0.2
 Flask-Testing==0.6.1
 idna==2.6
